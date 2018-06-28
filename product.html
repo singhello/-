@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <title>JavaScript</title>
+		<style>
+			table{border-collapse:collapse;}
+			td{border:1px solid;}
+		</style>
+		<script>
+			window.onload = function(){
+				//获取到查看购物车的按钮
+				let oBtn = document.querySelector('button');
+				//获取购买按钮
+				let oBuys = document.querySelectorAll('.buy');
+				//点击按钮，跳转页面
+				oBtn.onclick = function(){
+					window.location = "cart.html";
+				}
+				//点击购买，获取购物车页所需的信息，并以cookie的形式传递过去
+				for(let i = 0,len = oBuys.length;i < len;i ++){
+					oBuys[i].num = 0;
+					oBuys[i].onclick = function(){
+						//获取商品ID
+						let goodId = this.parentNode.parentNode.firstChild.firstChild.value;
+						//获取商品名
+						let goodName = this.parentNode.parentNode.firstChild.lastChild.nodeValue;
+						//获取商品单价
+						let goodPrice = this.parentNode.previousSibling.innerHTML;
+						//统计数量
+						this.num ++;
+						//cookie
+						//document.cookie = "key=value;expires=日期对象;path=/"
+						//product_ + 编号
+						//设计一个json
+						//'{"id" : goodId,"name" : "goodName","price" : goodPrice,"num" : this.num}'
+						//'{"id" : ' + goodId + ',"name" : "' + goodName + '","price" : ' + goodPrice + ',"num" : ' + this.num + '}'
+						//创建有效期
+						let date = new Date();
+						date.setDate(date.getDate() + 4);
+						//创建cookie
+						document.cookie = 'product_' + goodId +'=' + '{"id" : ' + goodId + ',"name" : "' + goodName + '","price" : ' + goodPrice + ',"num" : ' + this.num + '}';
+					}
+				}
+			}
+		</script>
+    </head>
+    <body>
+		<table>
+			<tr>
+				<td>商品名</td><td>价格</td><td>操作</td>
+			</tr>
+			<tr><td><input type="hidden" value="1">水杯</td><td>29</td><td><a class="buy" href="javascript:;">购买</a></td></tr>
+			<tr><td><input type="hidden" value="2">电脑</td><td>4999</td><td><a class="buy" href="javascript:;">购买</a></td></tr>
+			<tr><td><input type="hidden" value="3">手机</td><td>1999</td><td><a class="buy" href="javascript:;">购买</a></td></tr>
+		</table>
+		<button>查看购物车</button>
+    </body>
+</html>

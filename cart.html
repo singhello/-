@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <title>JavaScript</title>
+		<style>
+			table{border-collapse:collapse;}
+			td{border:1px solid;}
+		</style>
+		<script>
+			window.onload = function(){
+				//'product_1={"id" : 1,"name" : "水杯","price" : 29,"num" : 2}; product_2={"id" : 2,"name" : "电脑","price" : 4999,"num" : 1}; product_3={"id" : 3,"name" : "手机","price" : 1999,"num" : 3}'
+				/*
+				[
+					'product_1={"id" : 1,"name" : "水杯","price" : 29,"num" : 2}',
+					'product_2={"id" : 2,"name" : "电脑","price" : 4999,"num" : 1}',
+					'product_3={"id" : 3,"name" : "手机","price" : 1999,"num" : 3}'
+				]
+				[
+					[
+						'product_1',
+						'{"id" : 1,"name" : "水杯","price" : 29,"num" : 2}'
+					],
+					[
+						'product_2',
+						'{"id" : 2,"name" : "电脑","price" : 4999,"num" : 1}'
+					],
+					[
+						'product_3',
+						'{"id" : 3,"name" : "手机","price" : 1999,"num" : 3}'
+					]
+				]
+				var json = {"id" : 1,"name" : "水杯","price" : 29,"num" : 2}
+				*/
+				//取出每一个商品
+				let arr = document.cookie.split('; ');
+				//遍历数组,取出每个商品的key和value
+				for(let i = 0,len = arr.length;i < len;i ++){
+					let list = arr[i].split('=');
+					//过滤商品
+					if(list[0].indexOf('product_') == 0){
+						//将json字符串转为json对象
+						var json = JSON.parse(list[1]);
+//						alert(json.id);
+						//动态布局
+						//inserRow() : 插入一行 tr
+						//insertCell():插入一个单元格 td
+						var _tr = document.getElementById("tab").insertRow();
+						var _td = _tr.insertCell();
+						_td.innerHTML = json.id;
+						_td = _tr.insertCell();
+						_td.innerHTML = json.name;
+						_td = _tr.insertCell();
+						_td.innerHTML = json.price;
+						_td = _tr.insertCell();
+						_td.innerHTML = json.num;
+					}
+				}
+			}
+		</script>
+    </head>
+    <body>
+		<table id="tab">
+			<tr><td>序号</td><td>商品名称</td><td>商品单价</td><td>数量</td></tr>
+		</table>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<table id="tab" border="1px solid" cellspacing="0" cellpadding="0">
+			<tr><td>序号</td><td>商品名</td><td>价格</td><td>数量</td></tr>
+		</table>
+		<script type="text/javascript">
+			//product_1={"id" : 1, "name" : "水杯", "price" : 99, "num" : 1}; product_2={"id" : 2, "name" : "电脑", "price" : 4999, "num" : 1}; product_3={"id" : 3, "name" : "手机", "price" : 2999, "num" : 1}
+			let arr = document.cookie.split("; ");
+			for(let i = 0; i < arr.length; i ++){
+				let list = arr[i].split("=");
+				if(list[0].indexOf(product_) == 0){
+					let json1 = JSON.parse(list[1]);
+					var tab = document.getElementById("tab");
+					var _tr = tab.insertRow();
+					var _td = _tr.insertCell();
+					_td.innerHTML = json1.id;
+					_td = _tr.insertCell();
+					_td.innerHTML = json1.name;
+					_td = _tr.insertCell();
+					_td.innerHTML = json1.price;
+					_td = _tr.insertCell();
+					_td.innerHTML = json1.num;
+					
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+	<table border="1px solid" cellspacing="0" cellpadding="0">
+			<tr><td>商品名</td><td>价格</td><td>操作</td></tr>
+			<tr><td><input type="hidden" value="1"/>水杯</td><td>99</td><td><a href="javascript:;" class="buy">购买</a></td></tr>
+			<tr><td><input type="hidden" value="2"/>电脑</td><td>4999</td><td><a href="javascript:;" class="buy">购买</a></td></tr>
+			<tr><td><input type="hidden" value="3"/>手机</td><td>2999</td><td><a href="javascript:;" class="buy">购买</a></td></tr>
+	</table>
+	<button>查看购物车</button>
+    <script>
+    	console.log(document.cookie)
+        let oBuys = document.querySelectorAll(".buy");
+        let oBtn = document.querySelector("button");
+        oBtn.onclick = function(){
+        	window.location.href = "hello.html";
+        }
+        console.log(oBuys)
+        for(let i = 0; i < oBuys.length; i ++){
+        	oBuys[i].num = 0;
+        	oBuys[i].onclick = function(){
+        		let goodId = this.parentNode.parentNode.firstChild.firstChild.value;
+        		let goodName = this.parentNode.parentNode.firstChild.lastChild.nodeValue;
+        		let goodPrice = this.parentNode.previousSibling.innerHTML;
+        		this.num ++;
+        		//document.cookie = 'key=value,expirse=日期对象,path="/"';
+        		// 'product_id={"序号" : goodId, "name" : "goodName", "price" : goodPrice, "num" : this.num}'
+        		document.cookie = 'product_' + goodId + '=' + '{"id" : ' + goodId + ', "name" : "' + goodName + '", "price" : ' + goodPrice + ', "num" : ' + this.num + '}';
+        		console.log(document.cookie)
+        	}
+        	
+        }
+    </script>
+</body>
+</html>
